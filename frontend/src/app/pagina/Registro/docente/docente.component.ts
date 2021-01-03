@@ -60,7 +60,15 @@ const datos =  {
 }
 
 console.log(datos)
-
+fetch('http://localhost:3000/docente', {
+  method: 'POST', // or 'PUT'
+  body: JSON.stringify(datos), // data can be `string` or {object}!
+  headers:{
+    'Content-Type': 'application/json'
+  }
+}).then(res => res.json())
+.catch(error => console.error('Error:', error))
+.then(response => console.log('Success:', response));
 
 
  }
