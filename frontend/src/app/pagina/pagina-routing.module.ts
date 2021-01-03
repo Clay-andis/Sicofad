@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
+import {DocenteComponent} from './Registro/docente/docente.component';
 import {NbAuthComponent} from '@nebular/auth';
 import { InicioComponent } from '../pagina/inicio/inicio.component';
 import { DelegadosComponent } from './formatos/delegados/delegados.component';
@@ -19,6 +19,17 @@ export const routes: Routes = [
           }
       ]
       },
+      {
+        path: 'Registro',
+        children: [
+          {
+            path: 'docente',
+            component: DocenteComponent,
+
+          },
+         
+        ]
+      }
       
     ]
  

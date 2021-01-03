@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-
 import { Routes, RouterModule, ExtraOptions } from '@angular/router';
 
 
@@ -9,6 +8,7 @@ const routes: Routes = [
     loadChildren: () => import('./pagina/pagina.module')
       .then(m => m.PaginaModule),
   },
+  
   {
     path: 'auth',
     loadChildren: './auth/auth.module#SifoCadAuthModule',

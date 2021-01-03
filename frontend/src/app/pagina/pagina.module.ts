@@ -8,11 +8,15 @@ import { FooterComponent } from './footer/footer.component';
 import { DelegadosComponent } from './formatos/delegados/delegados.component';
 import { SilabosComponent } from './formatos/silabos/silabos.component';
 import { BienvenidaComponent } from './bienvenida/bienvenida.component';
+import { DocenteComponent } from './Registro/docente/docente.component';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
-  declarations: [HeaderComponent, InicioComponent, FooterComponent, DelegadosComponent, SilabosComponent, BienvenidaComponent, ],
+  declarations: [HeaderComponent, InicioComponent, FooterComponent, DelegadosComponent, SilabosComponent, BienvenidaComponent, DocenteComponent ],
   imports: [
     CommonModule,
+    FormsModule,
     NbUserModule,
     NbLayoutModule,
     PaginaRoutingModule,

@@ -6,6 +6,7 @@ docenteCtrl.getDocentes = async (req, res) => {
     res.json(docentes); 
 }
 
+
 docenteCtrl.createDocente = async (req, res) => {
     const docent = new docente({
         nombre: req.body.nombre,
@@ -25,11 +26,13 @@ docenteCtrl.getDocente = async (req, res) => {
 
 docenteCtrl.editDocente = async (req, res) => {
     const { id } = req.params;
+
     const ndocent = {
         nombre: req.body.nombre,
         codigo: req.body.codigo,
         carga_academica: req.body.carga_academica
     };
+    
     await docente.findByIdAndUpdate(id, {$set: ndocent}, {new: true});
     res.json({status: 'Docente Actualizado'});
 }
@@ -38,5 +41,6 @@ docenteCtrl.deleteDocente = async (req, res) => {
     await docente.findByIdAndRemove(req.params.id);
     res.json({status: 'Docente Eliminado'});
 }
+
 
 module.exports = docenteCtrl;

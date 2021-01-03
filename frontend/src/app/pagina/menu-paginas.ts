@@ -1,5 +1,6 @@
 import { NbMenuItem } from '@nebular/theme';
 
+
 export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Formatos',
@@ -30,4 +31,14 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'keypad-outline',
     link: '/Inicio/Reportes',
   },
+  {
+    title: 'Registros',
+    children: [
+      {
+        title:'docente',
+        link:'/Inicio/Registro/docente'
+      }
+
+    ]
+  }
 ]

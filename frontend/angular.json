@@ -125,6 +125,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "sicofad"
+    }
+  },
+  "defaultProject": "sicofad",
+  "cli": {
+    "analytics": "2a68393c-1613-4304-962e-7e78b671c515"
+  }
 }

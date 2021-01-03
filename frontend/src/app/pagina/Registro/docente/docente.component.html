@@ -1,0 +1,54 @@
+<div class="row">
+    <h1>Registro de Profesores</h1>
+    <form #docenteForm="ngForm" (ngSubmit)="addDocente(docenteForm)">
+        <div class="row">
+          <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="docenteService.selectedDocente._id">
+            <div class="col">
+                <input type="text" class="form-control" placeholder="Nombres y Apellidos" aria-label="First name"
+                    name="nombre" #nombre="ngModel" [(ngModel)]="docenteService.selectedDocente.nombre">
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" placeholder="Codigo" aria-label="Last name" name="codigo"
+                    #codigo="ngModel" [(ngModel)]="docenteService.selectedDocente.codigo">
+            </div>
+        </div>
+
+
+        <div class="contaniner">
+            <h1>Carga Academica</h1>
+        </div>
+        
+
+        <div class="col-md-8">
+            <table class="table table-striped ">
+              <thead>
+                <th>Codigo</th>
+                <th>Curso</th>
+                <th>Grupo</th>
+                <th>Operations</th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let curso of docenteService.cursos"   >
+                  <td>{{ curso.codigo }}</td>
+                  <td>{{ curso.nombre }}</td>
+                  <td>{{ curso.grupo }}</td>
+                  <td>
+                    <button class="btn btn-dark" id="buton" (click)="AgregarCurso(curso)"  >
+                      <i >Agregar</i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        <br>
+        <div>
+            <button class="btn btn-dark ">Guardar</button>
+        </div>
+    </form>
+
+   
+
+
+</div>
