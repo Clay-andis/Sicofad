@@ -1,54 +1,74 @@
-<div class="row">
-    <h1>Registro de Profesores</h1>
-    <form #docenteForm="ngForm" (ngSubmit)="addDocente(docenteForm)">
-        <div class="row">
-          <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="docenteService.selectedDocente._id">
-            <div class="col">
-                <input type="text" class="form-control" placeholder="Nombres y Apellidos" aria-label="First name"
-                    name="nombre" #nombre="ngModel" [(ngModel)]="docenteService.selectedDocente.nombre">
-            </div>
-            <div class="col">
-                <input type="text" class="form-control" placeholder="Codigo" aria-label="Last name" name="codigo"
-                    #codigo="ngModel" [(ngModel)]="docenteService.selectedDocente.codigo">
-            </div>
-        </div>
-
-
-        <div class="contaniner">
-            <h1>Carga Academica</h1>
-        </div>
+<div class="contaniner">
+  <h1>Registro de Profesores</h1>
+  <form ngNoForm [formGroup]="registerForm" (submit)="submit()" >
+      <div class="row">
+        <div class="form-group col-md-5" >
+         
+          <input type="text" class="form-control" formControlName="nombre"  placeholder="Nombres y Apellidos" >
+      </div>
+      <div class="form-group col-md-5">
         
-
-        <div class="col-md-8">
-            <table class="table table-striped ">
-              <thead>
-                <th>Codigo</th>
-                <th>Curso</th>
-                <th>Grupo</th>
-                <th>Operations</th>
-              </thead>
-              <tbody>
-                <tr *ngFor="let curso of docenteService.cursos"   >
-                  <td>{{ curso.codigo }}</td>
-                  <td>{{ curso.nombre }}</td>
-                  <td>{{ curso.grupo }}</td>
-                  <td>
-                    <button class="btn btn-dark" id="buton" (click)="AgregarCurso(curso)"  >
-                      <i >Agregar</i>
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-        <br>
-        <div>
-            <button class="btn btn-dark ">Guardar</button>
+          <input type="text" class="form-control" formControlName="codigo" placeholder="Codigo">
+  
+      </div>
+      </div>
+      
+      <div class="contaniner">
+        <h1>Carga Academica</h1>
+      </div>
+    
+    <div class="col-md-8">
+        <table class="table table-striped ">
+          <thead>
+            <th>Codigo</th>
+            <th>Curso</th>
+            <th>Grupo</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let curso of docenteService.cursos"   >
+              <td>{{ curso.codigo }}</td>
+              <td>{{ curso.nombre }}</td>
+              <td>{{ curso.grupo }}</td>
+            
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="form-group">
+          <button class="btn btn-dark" (click)="agregarCarga()">Agregar Carga Academica</button>
         </div>
-    </form>
+        <br>
+      
+        <div formArrayName="carga_academica" *ngFor="let carg of carga_academica.controls; let i = index">
+          <div [formGroupName]="i">
+            <br>
+            <div class="form-group row">
 
-   
-
-
+              <label class="col-md-1" [attr.for]="'nombre' + i">Curso</label>
+              <div class="col-md-3">
+                <input type="text" [attr.id]="'nombre' + i" class="form-control" formControlName="nombre">
+              </div>
+          
+              <label class="col-md-1" [attr.for]="'codigo' + i">Codigo</label>
+              <div class="col-md-3">
+                <input type="text" [attr.id]="'codigo' + i" class="form-control" formControlName="codigo">
+              </div>
+              
+              <label class="col-md-1" [attr.for]="'grupo' + i">Grupo</label>
+              <div class="col-md-1">
+                <input type="text" [attr.id]="'grupo' + i" class="form-control" formControlName="grupo">
+              </div>
+              <div class="col-md-2">
+                <button class="btn btn-dark" (click)="removerCarga(i)">Remover</button>
+              </div>
+             
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+          <button class="btn btn-dark me-md-2" type="submit">Agregar</button>
+          <button class="btn btn-dark" type="button" (click)="refrescar()">Refrescar</button>
+        </div>
+  </form>
 </div>

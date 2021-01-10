@@ -3,10 +3,10 @@ import {DocenteService} from '../../Services/docente.service'
 import { NgForm } from '@angular/forms'
 import {Docente} from '../../../models/docente'
 import {Curso} from '../../../models/curso'
+import { FormBuilder, FormGroup, FormArray, Validator} from '@angular/forms';
 
-import { formatCurrency } from '@angular/common';
 declare var M:any;
-let docente =[]
+
 const buton = document.getElementById('buton')
 @Component({
   selector: 'app-docente',
@@ -16,18 +16,63 @@ const buton = document.getElementById('buton')
 })
 
 export class DocenteComponent implements OnInit {
-
+  
 
    
-  constructor(public docenteService : DocenteService) { 
+  constructor(public docenteService : DocenteService,
+    private formBuilder: FormBuilder) { 
   
   }
 
   ngOnInit(): void {
     this.getCursos()
   
-  
   }
+
+  get nombre(){
+    return this.registerForm.get('nombre')
+  }
+  get codigo(){
+    return this.registerForm.get('codigo')
+  }
+
+  get carga_academica(){
+    return this.registerForm.get('carga_academica') as FormArray
+  }
+
+registerForm=this.formBuilder.group({
+  nombre : [],
+  codigo:[],
+  carga_academica:this.formBuilder.array([])
+
+})
+agregarCarga(){
+  const cargaFormGroup  =this.formBuilder.group({
+    nombre: '',
+    codigo:'',
+    grupo:''
+  })
+this.carga_academica.push(cargaFormGroup)
+}
+
+removerCarga(indice: number) {
+  this.carga_academica.removeAt(indice);
+}
+
+submit(){
+  
+  console.log(this.registerForm.value)
+  
+}
+
+refrescar() {
+  this.registerForm.patchValue({
+    nombre: '',
+    codigo: '',
+
+  });
+  this.carga_academica.controls.splice(0, this.carga_academica.length);
+}
 
 
 
@@ -49,29 +94,6 @@ export class DocenteComponent implements OnInit {
     })
   }
   }
- 
-
-AgregarCurso(curso: Curso){
-  
-const datos =  {
-  nombre : curso.nombre,
-  codigo: curso.codigo,
-  grupo: curso.grupo 
-}
-
-console.log(datos)
-fetch('http://localhost:3000/docente', {
-  method: 'POST', // or 'PUT'
-  body: JSON.stringify(datos), // data can be `string` or {object}!
-  headers:{
-    'Content-Type': 'application/json'
-  }
-}).then(res => res.json())
-.catch(error => console.error('Error:', error))
-.then(response => console.log('Success:', response));
-
-
- }
 
 
   getCursos(){

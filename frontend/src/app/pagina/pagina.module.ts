@@ -9,13 +9,15 @@ import { DelegadosComponent } from './formatos/delegados/delegados.component';
 import { SilabosComponent } from './formatos/silabos/silabos.component';
 import { BienvenidaComponent } from './bienvenida/bienvenida.component';
 import { DocenteComponent } from './Registro/docente/docente.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [HeaderComponent, InicioComponent, FooterComponent, DelegadosComponent, SilabosComponent, BienvenidaComponent, DocenteComponent ],
   imports: [
+    
     CommonModule,
+ReactiveFormsModule,
     FormsModule,
     NbUserModule,
     NbLayoutModule,
